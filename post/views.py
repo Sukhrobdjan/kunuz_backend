@@ -2,9 +2,9 @@ from pipes import Template
 from django.shortcuts import render
 
 from helpers.models import BaseModels
-from . serializers import TagSerializer,CategorySerializer,PostSerializer,RegionSerializer,TeamSerializer
+from . serializers import TagSerializer,CategorySerializer,PostSerializer,RegionSerializer,TeamSerializer,AudioSerializer
 from rest_framework.generics import ListCreateAPIView,ListAPIView
-from .models import Post, Region,Tag,Category,Team
+from .models import Audio, Post, Region,Tag,Category,Team
 from helpers.pagination import CustomPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -13,7 +13,7 @@ from django.utils.decorators import method_decorator
 
 
 
-class TagView(ListCreateAPIView):
+class TagNewsView(ListCreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     pagination_class = CustomPagination
@@ -93,6 +93,16 @@ class PostView(ListCreateAPIView):
 class TeamListView(ListCreateAPIView):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+
+
+
+class AudioListView(ListCreateAPIView):
+    queryset = Audio.objects.all()
+    serializer_class = AudioSerializer
     pagination_class = CustomPagination
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]

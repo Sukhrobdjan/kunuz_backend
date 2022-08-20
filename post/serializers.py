@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post,Tag,Category,Region,Team
+from .models import Post,Tag,Category,Region,Team,Audio
 
 
 
@@ -31,4 +31,10 @@ class PostSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
+        fields = '__all__'
+
+
+class AudioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Audio
         fields = '__all__'
